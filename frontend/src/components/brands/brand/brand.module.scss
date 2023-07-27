@@ -1,0 +1,13 @@
+.item {
+	background: #f8f8f8;
+	height: 82px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.img {
+	padding: 20px;
+	object-fit: contain;
+}

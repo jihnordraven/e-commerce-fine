@@ -1,0 +1,88 @@
+.title {
+	font-size: 48px;
+	margin-bottom: 20px;
+}
+
+.login {
+	position: relative;
+	width: 35%;
+	height: 70%;
+	background: white;
+	border-radius: 8px;
+	padding: 30px 10px 30px;
+	border: 1px solid green;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.cancel {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.login__button {
+	padding: 20px;
+	font-size: 16px;
+	background: rgb(157, 157, 157);
+	color: white;
+	border: none;
+	cursor: default;
+}
+
+.button__active {
+	background: green;
+	transition: 0.1s;
+	cursor: pointer;
+
+	&:hover {
+		background: rgb(7, 165, 7);
+	}
+}
+
+.login__here {
+	color: green;
+	font-weight: 700;
+	cursor: pointer;
+	transition: 0.1s;
+
+	&:hover {
+		color: rgb(7, 165, 7);
+	}
+}
+
+.form {
+	width: 400px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.confirm {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 400px;
+	line-height: 20px;
+}
+
+.confirm__checkbox {
+	width: 20px;
+	height: 20px;
+	border: 1px solid gray;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

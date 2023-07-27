@@ -1,0 +1,40 @@
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	margin-top: 45px;
+}
+
+.row {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.arrows {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+}
+
+.arrow {
+	font-size: 26px;
+	color: #76bc21;
+	cursor: pointer;
+}
+
+.title__text {
+	font-size: 22px;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+
+.cards {
+	display: flex;
+	justify-content: space-between;
+}

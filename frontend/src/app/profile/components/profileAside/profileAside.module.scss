@@ -1,0 +1,14 @@
+.aside {
+	width: 320px;
+	padding-right: 10px;
+	border-right: 1px solid #efefef;
+	// max-height: 100vh;
+	// overflow-y: scroll;
+	// border-left: 1px solid gray;
+}
+
+.items {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}

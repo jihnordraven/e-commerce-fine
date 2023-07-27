@@ -1,0 +1,49 @@
+.item {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.label {
+	display: flex;
+	gap: 3px;
+}
+
+.label__text {
+	font-size: 18px;
+}
+
+.label__mark {
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.inputContainer {
+	position: relative;
+	width: 400px;
+}
+
+.input {
+	width: 100%;
+	padding: 20px;
+	border: 1px solid #d6d9e6;
+	font-size: 15px;
+	transition: 0.1s;
+
+	&:focus {
+		border: 1px solid #67a41d;
+	}
+}
+
+.input__active {
+	border: 1px solid red;
+}
+
+.action {
+	position: absolute;
+	top: 50%;
+	font-size: 24px;
+	right: 10px;
+	transform: translateY(-50%);
+	cursor: pointer;
+}

@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.filters {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.input {
+	width: 40%;
+	padding: 15px;
+	border: 1px solid gray;
+	border-radius: 3px;
+	font-size: 16px;
+}
+
+.all {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.all__count {
+	font-weight: 700;
+	color: green;
+}
+
+.sort {
+	width: 40%;
+}
+
+.main {
+	display: flex;
+	gap: 20px;
+}
+
+.items {
+	width: max-content;
+	padding-right: auto;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 30px;
+	justify-content: center;
+}
+
+.menu {
+	border-left: 1px solid #efefef;
+	padding-left: 20px;
+}

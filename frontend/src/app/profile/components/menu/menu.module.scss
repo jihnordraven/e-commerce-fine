@@ -1,0 +1,43 @@
+.menu {
+	padding-left: 10px;
+	width: 400px;
+	border-right: 1px solid #bbb;
+}
+
+.status {
+	font-size: 36px;
+	text-align: center;
+	margin-bottom: 16px;
+}
+
+.imgContainer {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	border-radius: 9999px;
+}
+
+.avatar {
+	border-radius: 9999px;
+	cursor: pointer;
+}
+
+.username {
+	margin-top: 10px;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.email {
+	font-size: 14px;
+	text-align: center;
+}
+
+// .info {
+// 	margin-top: 10px;
+// 	display: flex;
+// 	flex-direction: column;
+// 	gap: 10px;
+// }

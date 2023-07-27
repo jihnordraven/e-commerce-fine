@@ -1,0 +1,27 @@
+.item {
+	display: flex;
+	flex-direction: column;
+}
+
+.item__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #f3f3f3;
+	padding: 15px;
+	cursor: pointer;
+}
+
+.title__main {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.title__icon {
+	font-size: 24px;
+}
+
+.title__text {
+	font-size: 16px;
+}

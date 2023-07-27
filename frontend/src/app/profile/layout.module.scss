@@ -1,0 +1,17 @@
+.container {
+	width: 1400px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.bottom {
+	margin: 20px 0px;
+	display: flex;
+}
+
+.children {
+	padding-left: 10px;
+	border-left: 1px solid #efefef;
+	width: 100%;
+}

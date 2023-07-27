@@ -1,0 +1,25 @@
+.item {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.imgContainer {
+	position: relative;
+	height: 150px;
+}
+
+.img {
+	object-fit: cover;
+	cursor: pointer;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.title:hover {
+	color: #7bbf29;
+}

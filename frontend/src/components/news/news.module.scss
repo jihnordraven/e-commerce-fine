@@ -1,0 +1,19 @@
+.container {
+	width: 1400px;
+	margin: 40px auto;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.title {
+	font-size: 22px;
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+
+.items {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 35px;
+}

@@ -1,0 +1,35 @@
+.dropdown {
+	position: relative;
+	border: 1px solid #e0e0e0;
+	padding: 10px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.dropdown__title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.dropdown__items {
+	position: absolute;
+	left: 0;
+	top: calc(100% + 5px);
+	background: white;
+	width: 100%;
+	box-shadow: 0px 0px 30px rgb(209, 209, 209);
+	z-index: 1;
+}
+
+.dropdown__item {
+	padding: 15px 10px;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&:hover {
+		background: #e8e8e8;
+	}
+}

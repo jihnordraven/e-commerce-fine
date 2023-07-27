@@ -1,0 +1,26 @@
+.link {
+	padding: 15px 30px;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	&:hover {
+		background: #d6d6d6;
+		cursor: pointer;
+	}
+}
+
+.active {
+	padding: 15px 30px;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: #67a41d;
+	color: white;
+
+	.icon {
+		filter: invert(100%);
+	}
+}

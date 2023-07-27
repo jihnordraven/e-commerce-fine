@@ -1,0 +1,74 @@
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.path {
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.main {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.items {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 35px;
+}
+
+.pagination {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	margin: 75px auto 40px;
+}
+
+.pages {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.currentPage {
+	display: block;
+	font-size: 18px;
+	width: 45px;
+	text-align: center;
+	padding: 5px;
+}
+
+.from {
+	font-size: 20px;
+}
+
+.totalPages {
+	font-size: 20px;
+}
+
+.arrow {
+	padding: 12px;
+	font-size: 18px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 5px gray;
+	color: #76bc21;
+	cursor: pointer;
+}

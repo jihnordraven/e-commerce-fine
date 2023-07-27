@@ -1,0 +1,58 @@
+@import '~react-toastify/dist/ReactToastify.css';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	cursor: default;
+	overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	color: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.wrapper {
+	background: white;
+	color: #494949;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+input,
+textarea {
+	outline: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	/* Дополнительные стили инпута */
+}
