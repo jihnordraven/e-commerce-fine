@@ -1,4 +1,5 @@
-'use clietn'
+'use client'
+
 import { useState } from 'react'
 import { sortMenuMobileAndTables } from '../../data/sortMenu'
 import { ISortItem } from '@/types'
@@ -9,6 +10,8 @@ import { FaSort } from 'react-icons/fa'
 import s from './sortMenu.module.scss'
 import { sort } from '@/data'
 import SortDropdown from './sortDropdown/sortDropdown'
+
+import { StickyContainer, Sticky, StickyChildArgs } from 'react-sticky'
 
 type Props = {}
 

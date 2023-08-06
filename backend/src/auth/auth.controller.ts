@@ -10,7 +10,8 @@ import {
 	UseInterceptors,
 	UploadedFile,
 	Patch,
-	Get
+	Get,
+	Request
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { RegisterUserDto } from './dto/register-user.dto'
@@ -18,6 +19,7 @@ import { LoginUserDto } from './dto/login-user.dto'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { JwtGuard } from './guards/jwt.guard'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { RefreshGuard } from './guards/refresh.guard'
 
 @Controller('auth')
 export class AuthController {
@@ -55,14 +57,14 @@ export class AuthController {
 		}
 	}
 
-	@Patch()
-	@UseGuards(JwtGuard)
-	@UsePipes(new ValidationPipe())
-	@HttpCode(HttpStatus.OK)
-	async update(dto: UpdateUserDto) {
-		await this.authService.update(dto)
+	@Post('refresh')
+	@UseGuards(RefreshGuard)
+	async generateNewTokens(@Request() req) {
+		const { userId } = req.payload
+		const tokens = await this.authService.generateNewTokens(userId)
 		return {
-			message: 'Данные успешно обновлены'
+			access: tokens.access,
+			refresh: tokens.refresh
 		}
 	}
 }

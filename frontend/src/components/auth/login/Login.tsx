@@ -40,10 +40,11 @@ const Login: React.FC<Props> = () => {
 			//@ts-ignore
 			toast.success(res.data.message)
 			//@ts-ignore
-			const { access, refresh } = res.data
+			const { user, access, refresh } = res.data
+			window.localStorage.setItem('user', JSON.stringify(user))
 			window.localStorage.setItem('access', access)
 			window.localStorage.setItem('refresh', refresh)
-			dispatch(authSlice.actions.login({ access, refresh }))
+			dispatch(authSlice.actions.login({ user, access, refresh }))
 		}
 	}
 

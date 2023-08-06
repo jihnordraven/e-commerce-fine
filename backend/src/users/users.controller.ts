@@ -4,10 +4,16 @@ import {
 	HttpCode,
 	HttpStatus,
 	UseGuards,
-	Request
+	Request,
+	Body,
+	Post,
+	Patch,
+	UsePipes,
+	ValidationPipe
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { JwtGuard } from 'src/auth/guards/jwt.guard'
+import { UpdateUserDto } from 'src/auth/dto/update-user.dto'
 
 @Controller('users')
 export class UsersController {
@@ -18,11 +24,21 @@ export class UsersController {
 	@HttpCode(HttpStatus.OK)
 	async getProfile(@Request() req) {
 		const { userId } = req.payload
-		console.log(userId)
 		const userProfile = await this.usersService.getProfile(userId)
+		return userProfile
+	}
+
+	@Patch()
+	@UseGuards(JwtGuard)
+	@UsePipes(new ValidationPipe())
+	@HttpCode(HttpStatus.OK)
+	async update(@Request() req, @Body() dto: UpdateUserDto) {
+		const { userId } = req.payload
+		await this.usersService.update(userId, dto)
+		const user = await this.usersService.findByPk(userId)
 		return {
-			userProfile,
-			userId
+			message: 'Данные успешно обновлены',
+			user
 		}
 	}
 }

@@ -1,16 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const baseQuery = {
-	baseUrl: 'http://localhost:4200/api/auth',
-	access: window.localStorage.getItem('access') || null
-}
+const baseUrl = 'http://localhost:4200/api/auth'
+const access = window.localStorage.getItem('access') || null
+const refresh = window.localStorage.getItem('refresh') || null
+console.log(refresh)
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: baseQuery.baseUrl,
+		baseUrl: baseUrl,
 		prepareHeaders: (headers) => {
-			headers.set('Authorization', `Bearer ${baseQuery.access}`)
+			headers.set('Authorization', `Bearer ${access}`)
 			return headers
 		}
 	}),
@@ -28,8 +28,18 @@ export const authApi = createApi({
 				method: 'POST',
 				body: body
 			})
+		}),
+		refresh: build.mutation({
+			query: (body: { refresh: string }) => ({
+				url: '/refresh',
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${body.refresh}`
+				}
+			})
 		})
 	})
 })
 
-export const { useRegisterMutation, useLoginMutation } = authApi
+export const { useRegisterMutation, useLoginMutation, useRefreshMutation } =
+	authApi

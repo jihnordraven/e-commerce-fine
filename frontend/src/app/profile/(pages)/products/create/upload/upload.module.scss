@@ -1,0 +1,55 @@
+.upload {
+	position: relative;
+	width: 205px;
+	height: 205px;
+	border: 1px dashed black;
+
+	.upload__text {
+		position: absolute;
+		left: 43%;
+		top: 41%;
+	}
+
+	.upload__input {
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.img {
+		width: 100%;
+		height: 100%;
+		padding: 5px;
+		cursor: pointer;
+		object-fit: contain;
+	}
+
+	.imgContainer {
+		position: relative;
+		width: 100%;
+		height: 100%;
+
+		&:hover .remove {
+			display: flex;
+		}
+	}
+	.remove {
+		display: none;
+		position: absolute;
+		background: rgba(233, 233, 233, 0.8);
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+		transition: 1s;
+
+		.remove__icon {
+			font-size: 48px;
+		}
+	}
+}

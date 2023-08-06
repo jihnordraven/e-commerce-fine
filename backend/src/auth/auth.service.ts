@@ -3,7 +3,8 @@ import {
 	UnauthorizedException,
 	Injectable,
 	HttpException,
-	HttpStatus
+	HttpStatus,
+	NotFoundException
 } from '@nestjs/common'
 import { User } from 'models/user.model'
 import { UsersService } from 'src/users/users.service'
@@ -42,8 +43,7 @@ export class AuthService {
 			phone: dto.phone,
 			country: dto.country,
 			city: dto.city,
-			status: dto.status ? dto.status : 'Посетитель',
-			imagePath: ''
+			status: dto.status ? dto.status : 'Посетитель'
 		})
 		return await user.save()
 	}
@@ -62,17 +62,21 @@ export class AuthService {
 		return user
 	}
 
-	async update(dto: UpdateUserDto) {
-		await this.userService.update(dto)
-	}
-
 	async generateTokens(user: User) {
 		return {
 			access: this.jwtService.sign(
 				{ userId: user.id, email: user.email },
-				{ expiresIn: '1h' }
+				{ expiresIn: '7d' }
 			),
 			refresh: this.jwtService.sign({ userId: user.id }, { expiresIn: '7d' })
 		}
+	}
+
+	async generateNewTokens(userId: number) {
+		const user = await this.userService.findByPk(userId)
+		if (!user) {
+			throw new NotFoundException('Пользователь не найден')
+		}
+		return await this.generateTokens(user)
 	}
 }

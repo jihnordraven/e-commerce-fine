@@ -1,7 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { isUpsertQuery } from '@reduxjs/toolkit/dist/query/core/buildInitiate'
+
+export interface IUser {
+	age: number
+	city: string
+	country: string
+	email: string
+	id: number
+	image_url: null | string
+	name: string
+	phone: string
+	status: string
+	createdAt: Date
+	updatedAt: Date
+}
 
 type InitialState = {
 	isAuth: boolean
+	user: null | IUser
 	access: null | string
 	refresh: null | string
 	isOpenAuthModal: boolean
@@ -11,6 +27,7 @@ type InitialState = {
 
 const initialState: InitialState = {
 	isAuth: false,
+	user: null,
 	access: null,
 	refresh: null,
 	isOpenAuthModal: false,
@@ -27,12 +44,14 @@ export const authSlice = createSlice({
 	reducers: {
 		register(state, action) {
 			state.isAuth = true
+			state.user = action.payload.user
 			state.access = action.payload.access
 			state.refresh = action.payload.refresh
 			state.isOpenAuthModal = false
 		},
 		login(state, action) {
 			state.isAuth = true
+			state.user = action.payload.user
 			state.access = action.payload.access
 			state.refresh = action.payload.refresh
 			state.isOpenAuthModal = false
@@ -70,5 +89,3 @@ export const authSlice = createSlice({
 		}
 	}
 })
-
-export default authSlice.reducer

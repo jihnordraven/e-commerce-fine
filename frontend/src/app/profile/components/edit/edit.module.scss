@@ -1,6 +1,39 @@
 .edit {
 	width: 100%;
 	margin-left: 15px;
+
+	.profile {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		margin-bottom: 20px;
+		margin-top: 20px;
+
+		.user {
+			margin-left: 10px;
+			border: 1px solid #bbb;
+
+			.imgContainer {
+				margin: 20px auto 0;
+				position: relative;
+				width: 70%;
+				height: 250px;
+				border: 1px solid black;
+				border-radius: 50%;
+			}
+
+			.avatar {
+				object-fit: cover;
+				border-radius: 50%;
+			}
+
+			.user__info {
+				margin-top: 20px;
+				.email {
+					margin-left: 100px;
+				}
+			}
+		}
+	}
 }
 
 .title {
@@ -17,15 +50,6 @@
 	position: relative;
 	width: 32%;
 	height: 160px;
-}
-
-.table {
-	margin-top: 25px;
-	margin-bottom: 20px;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #bbb;
-	border-bottom: none;
 }
 
 .actions {

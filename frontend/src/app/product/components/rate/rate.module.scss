@@ -1,0 +1,19 @@
+.rate {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+
+	.stars {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+
+		.star {
+			font-size: 18px;
+			cursor: pointer;
+		}
+	}
+
+	.count {
+	}
+}

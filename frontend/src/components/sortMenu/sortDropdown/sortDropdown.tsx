@@ -15,7 +15,6 @@ const SortDropdown: React.FC<Props> = ({ sort }) => {
 	const toggleDropdown = () => {
 		setOpen((prev) => !prev)
 	}
-	console.log(sort)
 	return (
 		<div className={s.dropdown}>
 			<div className={s.dropdown__title} onClick={toggleDropdown}>

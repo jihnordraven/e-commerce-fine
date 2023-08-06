@@ -1,0 +1,14 @@
+.option {
+	font-size: 16px;
+	padding: 10px 0px;
+	cursor: pointer;
+	transition: 0.1s;
+
+	&:hover {
+		color: #76bc21;
+	}
+}
+
+.active {
+	color: #76bc21;
+}

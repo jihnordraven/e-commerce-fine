@@ -1,4 +1,5 @@
-import { Table, Model, Column, DataType } from 'sequelize-typescript'
+import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript'
+import { Product } from './product.model'
 
 @Table({ tableName: 'users' })
 export class User extends Model<User> {
@@ -46,5 +47,8 @@ export class User extends Model<User> {
 		type: DataType.STRING,
 		allowNull: true
 	})
-	imagePath: string
+	image_url: string
+
+	@HasMany(() => Product)
+	products: Product[]
 }

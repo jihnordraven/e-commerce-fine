@@ -7,7 +7,6 @@ type Props = {}
 const Profile: React.FC<Props> = () => {
 	return (
 		<div className={s.profile}>
-			<Menu />
 			<Edit />
 		</div>
 	)

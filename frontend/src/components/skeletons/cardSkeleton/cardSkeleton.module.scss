@@ -1,0 +1,29 @@
+$bg-color: #f4f4f4;
+$skeleton-bg: #e3e3e3;
+
+.container {
+	width: 240px;
+	height: 400px;
+	background: #efefef;
+	padding: 10px;
+
+	.img {
+		height: 180px;
+		width: 100%;
+		background: $skeleton-bg;
+	}
+
+	.name {
+		height: 90px;
+		margin-top: 35px;
+		width: 100%;
+		background: $skeleton-bg;
+	}
+
+	.price {
+		width: 100%;
+		margin-top: 20px;
+		height: 50px;
+		background: $skeleton-bg;
+	}
+}

@@ -1,26 +1,64 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 
 import Card from '@/components/card/Card'
 import SortMenu from '@/components/sortMenu/SortMenu'
 
 import s from './page.module.scss'
-import { HiArrowNarrowLeft } from 'react-icons/hi'
-import { HiArrowNarrowRight } from 'react-icons/hi'
 import Path from '@/components/path/Path'
+import { useGetProductsQuery } from '@/store/api/productsApi'
+import CardSkeleton from '@/components/skeletons/cardSkeleton/CardSkeleton'
+import { ICard } from '@/types/items'
+import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
+import { useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 
 type Props = {}
 
 const Collection: React.FC<Props> = () => {
-	const [currentPage, setCurrentPage] = useState('1')
+	const router = useRouter()
+	const search = useSearchParams()
+	const params = new URLSearchParams(search.toString())
 
-	const totalProducts = 34
-	const productsPerPage = 16
-	const totalPages = Math.ceil(totalProducts / productsPerPage)
+	const [totalPages, setTotalPages] = useState(1)
 
-	const handleChangePage = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setCurrentPage(e.target.value)
+	const page = params.get('page') || '1'
+	const q = params.get('q') || ''
+	const limit = 16
+	const slug = params.get('slug') || 'all'
+
+	const { data, isLoading } = useGetProductsQuery(
+		{
+			page: Number(page),
+			q,
+			limit,
+			slug
+		},
+		{
+			refetchOnMountOrArgChange: true
+		}
+	)
+	useEffect(() => {
+		if (data) {
+			setTotalPages(Math.ceil(data.total / limit))
+		}
+	}, [router, data])
+
+	const handlePrevPage = () => {
+		if (+page > 1) {
+			const prevPage = +page - 1
+			params.set('page', String(prevPage))
+			router.push(`?${params.toString()}`)
+		}
+	}
+
+	const handleNextPage = () => {
+		if (+page < totalPages) {
+			const prevPage = +page + 1
+			params.set('page', String(prevPage))
+			router.push(`?${params.toString()}`)
+		}
 	}
 
 	return (
@@ -29,61 +67,54 @@ const Collection: React.FC<Props> = () => {
 			<div className={s.content}>
 				<div className={s.main}>
 					<h1 className={s.title}>Смартфоны и планшеты</h1>
-					<div className={s.items}>
-						<Card
-							image="/phones/phone1.png"
-							status="Новинка"
-							size="xl"
-							oldPrice={40000}
-						/>
-						<Card
-							image="/phones/phone2.png"
-							status="-9%"
-							size="xl"
-							oldPrice={50000}
-						/>
-						<Card image="/phones/phone3.png" status="-28%" size="xl" />
-						<Card image="/phones/phone1.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone2.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone3.png" status="-48%" size="xl" />
-						<Card image="/phones/phone1.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone2.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone3.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone1.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone2.png" status="-24%" size="xl" />
-						<Card
-							image="/phones/phone3.png"
-							status="Новинка"
-							size="xl"
-							oldPrice={79000}
-						/>
-						<Card image="/phones/phone1.png" status="Новинка" size="xl" />
-						<Card
-							image="/phones/phone2.png"
-							status="Новинка"
-							size="xl"
-							oldPrice={50000}
-						/>
-						<Card image="/phones/phone3.png" status="Новинка" size="xl" />
-						<Card image="/phones/phone1.png" status="Новинка" size="xl" />
-					</div>
-					<div className={s.pagination}>
-						<div className={s.arrow}>
-							<HiArrowNarrowLeft style={{ display: 'block' }} />
-						</div>
-						<div className={s.pages}>
-							<input
-								className={s.currentPage}
-								type="number"
-								value={currentPage}
-								onChange={handleChangePage}
-							/>
-							<div className={s.from}>из</div>
-							<div className={s.totalPages}>{totalPages}</div>
-						</div>
-						<div className={s.arrow}>
-							<HiArrowNarrowRight style={{ display: 'block' }} />
-						</div>
+					<div>
+						{isLoading ? (
+							<div className={s.items}>
+								{Array.from({
+									//@ts-ignore
+									length: data && data.products.length
+								}).map(() => (
+									<CardSkeleton />
+								))}
+							</div>
+						) : (
+							<>
+								{data.total > 0 ? (
+									<div className={s.itemsContainer}>
+										<div className={s.items}>
+											{data.products.map((card: ICard) => (
+												<Card card={card} size="xl" />
+											))}
+										</div>
+										{data.total > limit && (
+											<div className={s.pagination}>
+												<div className={s.arrow} onClick={handlePrevPage}>
+													<HiArrowNarrowLeft style={{ display: 'block' }} />
+												</div>
+												<div className={s.pages}>
+													<div className={s.currentPage}>{page}</div>
+													<div className={s.from}>из</div>
+													<div className={s.totalPages}>{totalPages}</div>
+												</div>
+												<div className={s.arrow} onClick={handleNextPage}>
+													<HiArrowNarrowRight style={{ display: 'block' }} />
+												</div>
+											</div>
+										)}
+									</div>
+								) : (
+									<div className={s.empty}>
+										<Image
+											src="/empty-box.png"
+											alt="box"
+											width={50}
+											height={50}
+										/>
+										<span className={s.empty__text}>Пока здесь пусто</span>
+									</div>
+								)}
+							</>
+						)}
 					</div>
 				</div>
 				<SortMenu />

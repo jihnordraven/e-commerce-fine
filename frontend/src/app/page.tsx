@@ -3,14 +3,10 @@
 import Categories from '@/components/categories/Categories'
 import s from './page.module.scss'
 import Row from '@/components/row/Row'
-import Promotions from '@/components/promotions/Promotions'
 import Table from '@/components/table/Table'
-import Brands from '@/components/brands/Barnds'
 import News from '@/components/news/News'
 import { RestrictedPage } from '@/utils/RestrictedPage'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { checkIsRefreshTokenValid } from '@/utils/checkTokens'
+import Brands from '@/components/brands/Barnds'
 
 // const ads01 = [
 // 	{ image: '/promotions/dryer.jpg', title: 'Идеальная укладка' },
@@ -31,7 +27,7 @@ const HomePage: React.FC<Props> = () => {
 		<RestrictedPage>
 			<div className={s.container}>
 				<Categories />
-				<Row title="Смартфоны и планшеты" />
+				{/* <Row title="Смартфоны и планшеты" /> */}
 				{/* <Promotions items={ads01} /> */}
 				<Table />
 				{/* <Promotions items={ads02} /> */}

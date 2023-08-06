@@ -11,6 +11,7 @@
 }
 
 .value {
+	position: relative;
 	padding: 20px;
 	border-left: none;
 	font-size: 16px;
@@ -22,6 +23,8 @@
 }
 
 .edit__icon {
+	position: absolute;
+	right: 10px;
 	font-size: 22px;
 }
 

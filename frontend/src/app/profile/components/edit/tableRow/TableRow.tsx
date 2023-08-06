@@ -1,28 +1,38 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, ChangeEvent, KeyboardEvent } from 'react'
 
 import s from './tableRow.module.scss'
-import { AiOutlineEdit } from 'react-icons/ai'
+import { AiOutlineMinus } from 'react-icons/ai'
+import { LiaEditSolid } from 'react-icons/lia'
+import { useUpdateProfileMutation } from '@/store/api/usersApi'
+import { toast } from 'react-toastify'
+import 'react-datepicker/dist/react-datepicker.css'
 
 type Props = {
 	keyValue: string
-	value: string
+	value: number | string | null
 	canEdit?: boolean
+	name?: string
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+	handleComfirmation?: () => void
+	onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
+	age?: boolean
 }
 
-const TableRow: React.FC<Props> = ({ keyValue, value, canEdit }) => {
+const TableRow: React.FC<Props> = ({
+	keyValue,
+	value,
+	canEdit,
+	onChange,
+	name,
+	age
+}) => {
 	const [isEditMode, setIsEditMode] = useState(false)
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const onEditMode = () => {
 		setIsEditMode(true)
-	}
-
-	const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') {
-			setIsEditMode(false)
-		}
 	}
 
 	const handleSubmitBlur = () => {
@@ -35,24 +45,51 @@ const TableRow: React.FC<Props> = ({ keyValue, value, canEdit }) => {
 		}
 	}, [isEditMode])
 
+	const [updateProfile] = useUpdateProfileMutation()
+
+	const handleEnter = async (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			const access = window.localStorage.getItem('access') || ''
+			const { name, value } = e.currentTarget
+			const res = await updateProfile({ name, value, access })
+			//@ts-ignore
+			if (res.data) {
+				//@ts-ignore
+				toast.success(res.data.message)
+				setIsEditMode(false)
+			}
+		}
+	}
+
 	return (
 		<div className={s.row}>
 			<div className={s.key}>{keyValue}</div>
 			{isEditMode ? (
-				<input
-					className={s.input}
-					ref={inputRef}
-					onBlur={handleSubmitBlur}
-					type="text"
-					onKeyDown={handleSubmit}
-				/>
+				<>
+					<input
+						type="text"
+						className={s.input}
+						ref={inputRef}
+						onBlur={handleSubmitBlur}
+						onKeyDown={handleEnter}
+						name={name}
+						value={value ? value : ''}
+						onChange={onChange}
+					/>
+				</>
 			) : (
 				<>
 					{canEdit ? (
 						<div className={s.value} onClick={onEditMode}>
-							{value}
+							{value ? (
+								<>
+									{value} {age && <>y.o.</>}
+								</>
+							) : (
+								<AiOutlineMinus style={{ display: 'block' }} />
+							)}
 							<span className={s.edit__icon}>
-								<AiOutlineEdit style={{ display: 'block' }} />
+								<LiaEditSolid style={{ display: 'block' }} />
 							</span>
 						</div>
 					) : (

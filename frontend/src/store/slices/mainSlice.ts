@@ -5,7 +5,7 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-	isHeaderShowing: false
+	isHeaderShowing: true
 }
 
 export const mainSlice = createSlice({
@@ -20,5 +20,3 @@ export const mainSlice = createSlice({
 		}
 	}
 })
-
-export default mainSlice.reducer

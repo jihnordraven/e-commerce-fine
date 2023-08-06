@@ -1,0 +1,37 @@
+.dropdown {
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+
+	.value {
+		font-weight: 400;
+		padding: 5px 0px;
+		background: #dfdfdf;
+		width: 50px;
+		text-align: center;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.items {
+		position: absolute;
+		background: #efefef;
+		top: 100%;
+		left: 0;
+		width: 150%;
+		max-height: 200px;
+		overflow-y: scroll;
+
+		.item {
+			padding: 5px 10px;
+
+			&:hover {
+				background: #e5e5e5;
+				cursor: pointer;
+			}
+		}
+	}
+}

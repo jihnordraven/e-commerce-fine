@@ -1,5 +1,8 @@
+'use client'
+
 import ProfileItem from '../profileItem/ProfileItem'
 import s from './profileAside.module.scss'
+import { useState, useEffect } from 'react'
 
 const profileItems = [
 	{
@@ -126,8 +129,21 @@ const profileItems = [
 type Props = {}
 
 const ProfileAside: React.FC<Props> = () => {
+	const [isFixed, setIsFixed] = useState(false)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsFixed(window.scrollY >= 500)
+		}
+
+		window.addEventListener('scroll', handleScroll)
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [])
+
 	return (
-		<div className={s.aside}>
+		<div className={`${s.aside} ${isFixed ? s.fixed : ''}`}>
 			<ul className={s.items}>
 				{profileItems.map((profileItem) => (
 					<ProfileItem {...profileItem} />

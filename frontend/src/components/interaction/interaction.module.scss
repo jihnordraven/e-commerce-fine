@@ -1,0 +1,11 @@
+.interaction {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+
+	.icon {
+		display: block;
+		font-size: 22px;
+	}
+}

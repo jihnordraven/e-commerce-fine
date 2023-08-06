@@ -1,10 +1,5 @@
-'use client'
-
-import Path from '@/components/path/Path'
 import ProfileAside from './components/profileAside/ProfileAside'
 import s from './layout.module.scss'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
 import { RestrictedPage } from '@/utils/RestrictedPage'
 
 type Props = {

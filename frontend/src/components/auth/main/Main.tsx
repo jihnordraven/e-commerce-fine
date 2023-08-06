@@ -85,7 +85,7 @@ const Main: React.FC<Props> = () => {
 		})
 	}
 
-	const [registerMutation, { isLoading, data, error }] = useRegisterMutation()
+	const [registerMutation] = useRegisterMutation()
 
 	const handleSubmit = async () => {
 		const body = { ...formData }
@@ -106,10 +106,11 @@ const Main: React.FC<Props> = () => {
 			//@ts-ignore
 			toast.success(res.data.message)
 			//@ts-ignore
-			const { access, refresh } = res.data
+			const { user, access, refresh } = res.data
+			window.localStorage.setItem('user', JSON.stringify(user))
 			window.localStorage.setItem('access', access)
 			window.localStorage.setItem('refresh', refresh)
-			dispatch(authSlice.actions.register({ access, refresh }))
+			dispatch(authSlice.actions.register({ user, access, refresh }))
 		}
 	}
 

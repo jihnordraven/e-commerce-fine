@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent, KeyboardEvent } from 'react'
 
 import s from './header.module.scss'
 import { BsTelephone } from 'react-icons/bs'
@@ -17,6 +17,8 @@ import { authSlice } from '@/store/slices/authSlice'
 import { IoIosArrowUp, IoIosSearch } from 'react-icons/io'
 import { IoIosArrowDown } from 'react-icons/io'
 import { mainSlice } from '@/store/slices/mainSlice'
+import Options from './options/Options'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 type Props = {}
 
@@ -65,6 +67,45 @@ const Header: React.FC<Props> = () => {
 
 	const hideHeader = () => {
 		dispatch(mainSlice.actions.hideHeader())
+	}
+
+	const [value, setValue] = useState('')
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setValue(e.target.value)
+	}
+
+	const router = useRouter()
+
+	const search = useSearchParams()
+	const params = new URLSearchParams(search.toString())
+
+	const handleSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			const trimmedValue = value.trim()
+			if (trimmedValue.length >= 1 && trimmedValue !== '') {
+				params.delete('page')
+				params.set('q', trimmedValue)
+				router.push(`?${params.toString()}`)
+			} else {
+				params.delete('page')
+				params.delete('q')
+				router.push(`?${params.toString()}`)
+			}
+		}
+	}
+
+	const handleIconSearch = () => {
+		const trimmedValue = value.trim()
+		if (trimmedValue.length >= 1 && trimmedValue !== '') {
+			params.delete('page')
+			params.set('q', trimmedValue)
+			router.push(`?${params.toString()}`)
+		} else {
+			params.delete('page')
+			params.delete('q')
+			router.push(`?${params.toString()}`)
+		}
 	}
 
 	return (
@@ -116,8 +157,11 @@ const Header: React.FC<Props> = () => {
 											className={s.input}
 											type="text"
 											placeholder="Поиск"
+											value={value}
+											onChange={handleChange}
+											onKeyDown={handleSearch}
 										/>
-										<span className={s.input__icon}>
+										<span className={s.input__icon} onClick={handleIconSearch}>
 											<IoIosSearch />
 										</span>
 									</div>
@@ -142,12 +186,12 @@ const Header: React.FC<Props> = () => {
 												</div>
 												<div className={s.item__text}>Избранное</div>
 											</li>
-											<li className={s.nav__item}>
+											<Link href="/profile/cart" className={s.nav__item}>
 												<div className={s.item__icon}>
 													<BsCart3 />
 												</div>
 												<div className={s.item__text}>Корзина</div>
-											</li>
+											</Link>
 										</ul>
 									) : (
 										<div className={s.nav__auth}>
@@ -168,60 +212,7 @@ const Header: React.FC<Props> = () => {
 								</nav>
 							</div>
 						</div>
-						<div className={s.filtersContainer}>
-							<div className={s.filters}>
-								<div className={s.filters__options}>
-									<Link
-										className={s.filters__option}
-										href="/collection?categories=phones-tables"
-									>
-										Смартфоны и планшеты
-									</Link>
-									<Link
-										className={s.filters__option}
-										href="/collection?categories=laptops-tables-computers"
-									>
-										Ноутбуки, планшеты и компьютеры
-									</Link>
-									<Link
-										className={s.filters__option}
-										href="/collection?categories=devices-for-home"
-									>
-										Техника для дома
-									</Link>
-									<Link
-										className={s.filters__option}
-										href="/collection?categories=games"
-									>
-										Игры и развлечения
-									</Link>
-									<Link
-										className={s.filters__option}
-										href="/collection?categories=audi-video"
-									>
-										Телевизоры, Аудио-видео, Hi-Fi
-									</Link>
-									<Link
-										className={s.filters__option}
-										href="/collection?categories=photos-videos"
-									>
-										Фото и видеотехника
-									</Link>
-									<li className={s.filters__more}>
-										<div className={s.more__text}>Ещё</div>
-										<div className={s.more__icon}>
-											<SlArrowDown style={{ display: 'block' }} />
-										</div>
-										<ul className={s.dropdown}>
-											<li className={s.dropdown__item}>
-												Бытовая техника для кухни
-											</li>
-											<li className={s.dropdown__item}>Красота и здоровье</li>
-										</ul>
-									</li>
-								</div>
-							</div>
-						</div>
+						<Options />
 					</div>
 				</div>
 			</div>
